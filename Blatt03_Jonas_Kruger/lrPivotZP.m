@@ -1,4 +1,4 @@
-function [L, R, p] = lrPivotZP(A)
+function [A ,p] = lrPivotZP(A)
 n = size(A,1);
 p = 1:n;
 
@@ -15,5 +15,3 @@ for k = 1:n-1
         end
     end
 end
-L = tril(A(p,:),-1) + eye(n);
-R =  triu(A(p,:));
