@@ -7,7 +7,7 @@ n = 4;
 
 % Test solveLR
 for i =1:n
-    x = solveLR( testA(i), testb(i));
+    x = solveLrPivot( testA(i), testb(i));
     if(isequal(testx(i), x))
         disp('test case successfull!');
         disp(x);

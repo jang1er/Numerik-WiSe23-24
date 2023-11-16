@@ -1,4 +1,4 @@
-function [L, R] = kompaktLR(A)
+function A = kompaktLR(A)
     n = size(A,1);
     for k=1:n
         for i=k+1:n
@@ -11,6 +11,4 @@ function [L, R] = kompaktLR(A)
             end
         end
     end
-    L = tril(A,-1) + eye(n);
-    R = triu(A);
 end

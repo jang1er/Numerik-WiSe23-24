@@ -3,11 +3,12 @@ clc
 close all
 
 % number of testcases
-n = 3;
+cases = 3;
 format1 = 'Residium (b-Ax) :\n %e \n %e \n %e \n';
 
 % Test solveLR
-for i =1:n
+for i =1:cases
+    n = size(testA(i),1);
     x = solveLR( testA(i), testb(i));
     r = testb(i) - testA(i) * x;
     disp('#######################################');
@@ -31,17 +32,17 @@ for i =1:n
     disp('');
 
     % Display L and R-Matrix for both variants
-    [L, R] = kompaktLR(testA(i));
+    A = kompaktLR(testA(i));
     disp('');
     disp('L und R ohne Pivotisierung');
-    printMatrix(L);
+    printMatrix(tril(A,-1)+ eye(n));
     disp('-----------------------');
-    printMatrix(R);
-    [L, R, ~] = lrPivotZP(testA(i));
+    printMatrix(triu(A));
+    A = lrPivotZP(testA(i));
     disp('L und R mit Pivotisierung');
-    printMatrix(L);
+    printMatrix(tril(A,-1)+ eye(n));
     disp('-----------------------');
-    printMatrix(R);
+    printMatrix(triu(A));
 
 end
 
