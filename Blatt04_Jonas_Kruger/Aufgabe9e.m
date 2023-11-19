@@ -2,7 +2,7 @@ clearvars
 clc
 close all
 
-for i=1:4
+for i=1:6
     A = AV(i)
     inversA = inversMat(A)
     inversA * A
@@ -19,6 +19,6 @@ function A = AV(n)
         case 4
             A = [3,2;-2,-1];
         otherwise
-            A = eye(n);
+            A = makeRegular(n);
     end
 end
