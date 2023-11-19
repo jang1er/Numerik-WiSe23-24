@@ -7,7 +7,7 @@ for k = 1:n-1
     tmp = p(k); % temp storage
     mptr = k-1 + mptr; % correct pointer
     p(k) = p(mptr);    % switch in permutation vector
-    p(k-1+mptr) = tmp;
+    p(mptr) = tmp;
     % switch rows
     A([k,mptr],:) = A([mptr,k],:);
 

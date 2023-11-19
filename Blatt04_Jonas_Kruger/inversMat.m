@@ -1,27 +1,19 @@
 function inversA = inversMat(A)
 
+%
+%   Komplexität des Algorithmus : O(n^3)
+%
 n = size(A,1);
-inversA = eye(n);
-% transform A into upper triangle matrix
-for k=1:n
-    for j=k+1:n
-        a = A(j,k) / A(k,k);
-        A(j,:) = A(j,:) - A(k,:) .* a;
-        inversA(j,:) = inversA(j,:) - inversA(k,:) .* a; % make same operation on inverse
+% LR Zerlegung
+[A, p] = lrPivotVT(A);
+E = eye(n); % define Identity Matrix
+P = eye(n); % define Permutation Matrix
+P(:,p) = P; % make Permutation Matrix
 
-    end
-end
-
-% transform A into diagonal matrix
-for k=n:-1:1
-    for j=k-1:-1:1
-        a = A(j,k) / A(k,k);
-        A(j,:) = A(j,:) - A(k,:) .* a;
-        inversA(j,:) = inversA(j,:) - inversA(k,:) .* a; % make same operation on inverse
-    end
-end
-
-% transform A into identity matrix
-for k=1:n
-    inversA(k,:) = inversA(k,:) ./ A(k,k); % make same operation on inversea
+inversA = zeros(n); % define A^-1
+for i=1:n
+    % solve A*x = E(i) ==>x is A^-1(i)
+    b = E(:,i);
+    x = solveLR(A, P*b);
+    inversA(:,i) = x;   % construct inverse A
 end

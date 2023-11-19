@@ -2,12 +2,14 @@ close all
 clearvars
 clc
 
-n = 2.^(3:10);
+n = 2.^(3:11);
 timeZP = zeros(size(n,2),1);
 timeVP = zeros(size(n,2),1);
 timeSP = zeros(size(n,2),1);
 timeZT = zeros(size(n,2),1);
 timeVT = zeros(size(n,2),1);
+timeST = zeros(size(n,2),1);
+
 for i=1:size(n,2)
     A = makeRegular(n(i));
     tic
@@ -29,6 +31,10 @@ for i=1:size(n,2)
     tic
     lrPivotVT(A);
     timeVT(i) = toc;
+
+    tic
+    lrPivotST(A);
+    timeST(i) = toc;
 end
 figure(1);
 hold on;
@@ -37,7 +43,8 @@ loglog(n, timeVP);
 loglog(n, timeSP);
 loglog(n, timeZT);
 loglog(n, timeVT);
+loglog(n, timeST);
 hold off;
 xlabel('matrix size');
 ylabel('time in seconds');
-legend('ZP','VP','SP','ZT','VT');
+legend('ZP','VP','SP','ZT','VT','ST');
