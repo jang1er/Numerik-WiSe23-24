@@ -23,6 +23,5 @@ end
 
 % transform A into identity matrix
 for k=1:n
-    A(k,k) = 1;
-    inversA(k,k) = inversA(k,k) / A(k,k); % make same operation on inversea
+    inversA(k,:) = inversA(k,:) ./ A(k,k); % make same operation on inversea
 end
