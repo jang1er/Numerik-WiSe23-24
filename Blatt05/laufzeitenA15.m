@@ -16,8 +16,6 @@ for i=1:size(n,2)
     A =diag(v);
     A = A + diag(vv,1);
     A = A + diag(vv,-1);
-    disp(n(i));
-    disp(toc);
 
     tic
     [~] = cholesky(A);
@@ -46,3 +44,5 @@ hold off;
 xlabel('matrix size');
 ylabel('time in seconds');
 legend('ch','chV','chZ','chTri');
+
+%disp(mean(timeCH(end) - timeCH(1), timeCHV(end) - timeCHV(1), timeCHZ(end) - timeCHZ(1), timeCHTRI(end) - timeCHTRI(1)));
