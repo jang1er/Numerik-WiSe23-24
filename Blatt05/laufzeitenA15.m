@@ -34,15 +34,25 @@ for i=1:size(n,2)
     timeCHTRI(i) = toc;
 
 end
+
+% compute 
+m = eye(4,1);
+m(1) = timeCH(end);
+m(2) = timeCHZ(end);
+m(3) = timeCHV(end);
+m(4) = timeCHTRI(end);
+
+avg_m = mean(m);
 figure(1);
 hold on;
 loglog(n, timeCH);
 loglog(n, timeCHV);
 loglog(n, timeCHZ);
-loglog(n, timeCHTRI);
+loglog(n, timeCHTRI); 
+loglog([n(1) n(end)], [0 avg_m]); % plot average m
 hold off;
 xlabel('matrix size');
 ylabel('time in seconds');
-legend('ch','chV','chZ','chTri');
+legend('ch','chV','chZ','chTri','Steigungsgerade');
 
 %disp(mean(timeCH(end) - timeCH(1), timeCHV(end) - timeCHV(1), timeCHZ(end) - timeCHZ(1), timeCHTRI(end) - timeCHTRI(1)));
