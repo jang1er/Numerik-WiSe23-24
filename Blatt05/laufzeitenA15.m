@@ -55,4 +55,7 @@ xlabel('matrix size');
 ylabel('time in seconds');
 legend('ch','chV','chZ','chTri','Steigungsgerade');
 
-%disp(mean(timeCH(end) - timeCH(1), timeCHV(end) - timeCHV(1), timeCHZ(end) - timeCHZ(1), timeCHTRI(end) - timeCHTRI(1)));
+% Aufgabe 15 b)
+% die spezialisierte Cholesky Zerlegung läuft signifikant schneller als
+% alle andere Varianten. Dadurch zeigen sich die vorherigen theoretischen
+% Vermutungen bestätigt, dass die Funktion mit O(n) skaliert.
