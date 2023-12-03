@@ -21,9 +21,11 @@ for i=1:size(t,2)
     y(i) = h(t(i),x);
 end
 
+x_ = linspace(0,10,100);
+
 figure(1);
 hold on;
-plot(t, y);
+plot(x_, h(x_,x));
 scatter(t, b);
 
 % plot error from function values to real values
@@ -37,7 +39,8 @@ ylabel('Wasserhöhe in Meter');
 legend('solution', 'actual data', 'error');
 
 % calculate minimal error sum
-errorSum = dot(A*x -b, A*x - b);
+e = A*x -b;
+errorSum = sum(e.^2);
 disp(errorSum);
 
 disp('formula is');

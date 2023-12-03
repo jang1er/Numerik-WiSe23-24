@@ -2,7 +2,7 @@ close all
 clearvars
 clc
 
-n = 2.^(3:11);
+n = 2.^(3:9);
 timeCH = zeros(size(n,2),1);
 timeCHV = zeros(size(n,2),1);
 timeCHZ = zeros(size(n,2),1);
@@ -16,7 +16,7 @@ for i=1:size(n,2)
     A =diag(v);
     A = A + diag(vv,1);
     A = A + diag(vv,-1);
-
+    
     tic
     [~] = cholesky(A);
     timeCH(i) = toc;
