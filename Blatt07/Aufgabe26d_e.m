@@ -1,10 +1,25 @@
 clearvars
+close all
+clc
+
+% d)
+A =[1,1;1,2;1,2;1,5];
+b = [2;2;4;6];
+
+[Q1,Q2, R] = qr_HouseholderThin(A);
+n = size(A,2);
+R = R(1:n,1:n);
+b = Q1'*b;
+x = Rinvb2(R,b);
+disp(x);
+
+% e)
+clearvars
 clc
 close all
 
 % define Matrix A
 A =[1,0,1;1,sqrt(3)/2,1/2;1,sqrt(3)/2,-1/2;1,0,-1;1,-sqrt(3)/2,-1/2;1,-sqrt(3)/2,1/2];%
-A2 = [1 sin((2*pi*0)/12) cos((2*pi*0)/12); 1 sin((2*pi*2)/12) cos((2*pi*2)/12); 1 sin((2*pi*4)/12) cos((2*pi*4)/12); 1 sin((2*pi*6)/12) cos((2*pi*6)/12); 1 sin((2*pi*8)/12) cos((2*pi*8)/12); 1 sin((2*pi*10)/12) cos((2*pi*10)/12)];
 % define vector b
 b = [19/10;3;13/5;11/10;2/5;3/2];
 
@@ -16,7 +31,8 @@ y = eye(size(t,2),1);
 
 % compute solution (matlab already minimizes the problem)
 x = A \ b;
-
+disp('Matlab:')
+disp(x);
 for i=1:size(t,2)
     y(i) = h(t(i),x);
 end
@@ -42,33 +58,14 @@ legend('solution', 'actual data', 'error');
 e = A*x -b;
 errorSum = sum(e.^2);
 
-% c) i
-[Q, R] = qr(A);
-[xqr, uF] = solveQR(Q, R, b);
-disp('Difference of x and xqr');
-disp(abs(x-xqr));
+[Q1,Q2, R] = qr_HouseholderThin(A);
+n = size(A,2);
+R = R(1:n,1:n);
+b = Q1'*b;
+x = Rinvb2(R,b);
+disp('QR Householder Thin:')
+disp(x);
 
-% c) ii
-uF2 = norm(A*xqr-b)^2;
-disp('Differnece of uF and uF2');
-disp(abs(uF - uF2));
-
-% Aufgabe 23 c)
-[Q, R] = qr_Givens(A);
-[xGivens, uFGivens] = solveQR(Q, R, b)
-
-% Augabe 26 c)
-[Q, R] = qr_Householder(A);
-[xHouse, uFHouse] = solveQR(Q, R, b)
-
-disp('errorsum:')
-disp(errorSum);
-disp('uF and uF2');
-disp(uF);
-disp(uF2);
-
-disp('formula is');
-fprintf('h(t) = %f + %f * sin(2pi*t/12) + %f * cos(2pi*t/12)\n', x);
 
 function y = h(t,x)
     y = x(1) + x(2) * sin(pi*t/6) + x(3) * cos(pi*t/6);
