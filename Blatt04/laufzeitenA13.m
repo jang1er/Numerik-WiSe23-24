@@ -20,23 +20,23 @@ for i=1:size(n,2)
     disp(toc);
 
     tic
-    cholesky(A);
+    [~] = cholesky(A);
     timeCH(i) = toc;
 
     tic
-    choleskyV(A);
+    [~] = choleskyV(A);
     timeCHV(i) = toc;
 
     tic 
-    choleskyZ(A);
+    [~] = choleskyZ(A);
     timeCHZ(i) = toc;
 
     tic
-    lrPivotVP(A);
+    [~] = lrPivotVP(A);
     timeVP(i) = toc;
 
     tic
-    lrPivotVT(A);
+    [~] = lrPivotVT(A);
     timeVT(i) = toc;
 end
 figure(1);
